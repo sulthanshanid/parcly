@@ -25,17 +25,27 @@ const Index = () => {
   const [startModal, setStartModal] = useState(false);
   const [completeModal, setCompleteModal] = useState(false);
   const [getModel, setGetModel] = useState(false);
-
   const [allShipmentData, setAllShipmentData] = useState([]);
 
+  // ✅ Updated useEffect to correctly fetch shipment data
   useEffect(() => {
-    const getCampaignData = getAllShipments();
-
-    return async () => {
-      const allData = await getCampaignData;
-      setAllShipmentData(allData);
+    const fetchData = async () => {
+      try {
+        console.log("Fetching all shipments...");
+        const allData = await getAllShipments();
+        if (allData && Array.isArray(allData)) {
+          setAllShipmentData(allData);
+        } else {
+          console.warn("No shipment data received.");
+        }
+      } catch (error) {
+        console.error("Error fetching shipment data:", error);
+      }
     };
+
+    fetchData();
   }, []);
+
   return (
     <>
       <Services

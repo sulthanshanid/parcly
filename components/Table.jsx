@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const Table = ({ setCreateShipmentModel, allShipmentData }) => {
+  useEffect(() => {
+    console.log("All Shipments1111:", allShipmentData);
+  }, [allShipmentData]); // Logs whenever allShipmentData changes
+
   const convertTime = (time) => {
     const newTime = new Date(time);
     const dateTime = new Intl.DateTimeFormat("en-US", {
@@ -27,7 +31,6 @@ const Table = ({ setCreateShipmentModel, allShipmentData }) => {
         <div className="mt-3 md:mt-0">
           <p
             onClick={() => setCreateShipmentModel(true)}
-            href="#"
             className="inline-block px-4 py-2 text-white duration-150 font-medium
            bg-gray-800 hover:bg-gray-700 active:bg-gray-900 md:text-sm rounded-lg md:inline-flex cursor-pointer"
           >
@@ -59,7 +62,6 @@ const Table = ({ setCreateShipmentModel, allShipmentData }) => {
                   {shipment.sender.slice(0, 15)}...
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {/* {shipment.receiver.slice(0, 15)}... */}
                   {shipment.receiver}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
